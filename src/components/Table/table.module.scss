@@ -1,0 +1,23 @@
+@import 'styles/_variables.scss';
+
+.container {
+  background-color: $table-bg;
+  border-collapse: collapse;
+  min-width: 100%;
+  max-width: 100%;
+  box-shadow: $table-shadow;
+  border-radius: 4px;
+  font-size: 1.5rem;
+
+  .headerRow {
+    border-bottom: 3px solid $table-secondary;
+    text-align: left;
+  }
+
+  .itemRow {
+    border-bottom: 3px solid $table-secondary;
+    &:hover {
+      background-color: $table-secondary;
+    }
+  }
+}

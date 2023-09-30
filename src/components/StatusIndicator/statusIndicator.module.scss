@@ -1,0 +1,25 @@
+@import 'styles/_variables.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.statusIndicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.Alive {
+  background-color: $alive-status;
+}
+
+.Dead {
+  background-color: $dead-status;
+}
+
+.unknown {
+  background-color: $unknown-status;
+}
