@@ -1,6 +1,6 @@
 import { Character } from 'models';
 
-export interface PagingInfo {
+export interface Metadata {
   count: number;
   pages: number;
   next: string | null;
@@ -8,6 +8,6 @@ export interface PagingInfo {
 }
 
 export interface CharacterResponse {
-  info: PagingInfo;
+  info: Metadata;
   results: Character[];
 }

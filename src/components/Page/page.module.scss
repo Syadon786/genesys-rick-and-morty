@@ -1,0 +1,20 @@
+@import 'styles/_variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: $page-pd;
+
+  .title {
+    text-align: left;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 0;
+    .title {
+      text-align: center;
+    }
+  }
+}

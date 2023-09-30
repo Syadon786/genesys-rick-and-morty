@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { characterService } from 'services';
+import HomePage from 'pages/HomePage';
 
-const App = () => {
-  useEffect(() => {
-    const fetchChars = async () => {
-      console.log((await characterService.getCharacters()).results);
-    };
-    fetchChars();
-  }, []);
-  return <div></div>;
-};
+const App = () => <HomePage />;
 
 export default App;

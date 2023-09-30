@@ -1,7 +1,7 @@
 export interface Character {
   id: number;
   name: string;
-  status: string;
+  status: Status;
   species: string;
   type: string;
   gender: string;
@@ -12,6 +12,8 @@ export interface Character {
   url: string;
   created: string;
 }
+
+export type Status = 'Dead' | 'Alive' | 'unknown';
 
 interface Origin {
   name: string;
