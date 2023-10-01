@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 import classes from './page.module.scss';
 
 interface PageProps {
   title?: string;
-  children: ReactElement;
+  children: ReactNode;
 }
 
 export const Page = ({ title, children }: PageProps) => (

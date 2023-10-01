@@ -5,19 +5,20 @@ const axiosInstance = axios.create({
 });
 
 export interface RequestConfig
-  extends Omit<AxiosRequestConfig, 'baseURL' | 'method' | 'url'> {
-  resource: string;
+  extends Omit<AxiosRequestConfig, 'baseURL' | 'method'> {
+  resource?: string;
   method?: Method;
 }
 
 export async function request<T = void>({
   method = 'GET',
   resource,
+  url,
   ...config
 }: RequestConfig) {
   const requestConfig = {
     method,
-    url: resource,
+    url: url ?? resource,
     ...config,
   };
 

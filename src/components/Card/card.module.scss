@@ -1,0 +1,19 @@
+@import 'styles/_variables.scss';
+
+.card {
+  box-shadow: $card-shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 1.1rem;
+  padding: 24px 40px;
+  border-radius: 2%;
+  max-width: 600px;
+  min-width: 400px;
+  justify-content: center;
+}
+
+.title {
+  margin: 0;
+  padding: 8px 0 24px 0;
+}

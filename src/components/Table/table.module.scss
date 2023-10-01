@@ -7,14 +7,14 @@
   max-width: 100%;
   box-shadow: $table-shadow;
   border-radius: 4px;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 
-  .headerRow {
+  .header {
     border-bottom: 3px solid $table-secondary;
     text-align: left;
   }
 
-  .itemRow {
+  .row {
     border-bottom: 3px solid $table-secondary;
     &:hover {
       background-color: $table-secondary;

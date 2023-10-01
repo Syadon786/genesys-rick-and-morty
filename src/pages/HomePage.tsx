@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Character } from 'models';
 import {
@@ -32,6 +33,11 @@ const HomePage = () => {
     []
   );
 
+  const nameAccessor = useCallback(
+    ({ id, name }: Character) => <Link to={`/profile/${id}`}>{name}</Link>,
+    []
+  );
+
   const columnConfiguration = useMemo<ColumnConfiguration<Character>[]>(
     () => [
       {
@@ -43,6 +49,7 @@ const HomePage = () => {
       {
         header: 'Name',
         accessorKey: 'name',
+        accessor: nameAccessor,
       },
       {
         header: 'Species',
@@ -54,7 +61,7 @@ const HomePage = () => {
         accessor: statusAccessor,
       },
     ],
-    [avatarAccessor, statusAccessor]
+    [avatarAccessor, nameAccessor, statusAccessor]
   );
 
   return (
