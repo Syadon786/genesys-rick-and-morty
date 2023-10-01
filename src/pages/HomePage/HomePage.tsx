@@ -8,18 +8,29 @@ import {
   Avatar,
   Page,
   StatusIndicator,
+  SearchInput,
 } from 'components';
 import { characterService } from 'services';
 
+import classes from './homePage.module.scss';
+
 const HomePage = () => {
-  const [items, setItems] = useState<Character[]>([]);
+  const [items, setItems] = useState<Character[]>();
+  const [filter, setFilter] = useState('');
+
+  const handleFilterChange = useCallback((value: string) => {
+    setFilter(value);
+    console.log(value);
+  }, []);
 
   useEffect(() => {
     const getCharacters = async () => {
-      setItems((await characterService.getCharacters()).results);
+      setItems(
+        (await characterService.getCharacters({ filter }))?.results ?? []
+      );
     };
     getCharacters();
-  }, []);
+  }, [filter]);
 
   const avatarAccessor = useCallback(
     ({ image, name }: Character) => (
@@ -66,7 +77,18 @@ const HomePage = () => {
 
   return (
     <Page title="Rick and Morty Characters">
-      <Table columns={columnConfiguration} items={items} />
+      <div className={classes.inputContainer}>
+        <SearchInput
+          placeholder="Search by name"
+          initialValue={filter}
+          onChange={handleFilterChange}
+        />
+      </div>
+      {items && items?.length !== 0 ? (
+        <Table columns={columnConfiguration} items={items} />
+      ) : (
+        <div className={classes.noResults}>No results found</div>
+      )}
     </Page>
   );
 };

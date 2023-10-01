@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { Character } from 'models';
 
 export interface Metadata {
@@ -11,3 +12,5 @@ export interface CharacterResponse {
   info: Metadata;
   results: Character[];
 }
+
+export type ErrorResponse = AxiosResponse<{ error: string }>;

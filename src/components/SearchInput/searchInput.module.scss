@@ -1,0 +1,19 @@
+@import 'styles/variables.scss';
+
+.input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  min-width: 350px;
+  border-radius: 2;
+  border: none;
+  border-bottom: 1px solid #b8b8b8;
+  &:focus {
+    outline: none;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .input {
+    min-width: 95%;
+  }
+}
