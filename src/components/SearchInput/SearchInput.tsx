@@ -1,4 +1,7 @@
 import React, { ChangeEvent, useEffect, useState, useCallback } from 'react';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
+import { IconButton } from 'components';
 
 import classes from './searchInput.module.scss';
 
@@ -25,6 +28,10 @@ export const SearchInput = ({
     []
   );
 
+  const handleClearClick = useCallback(() => {
+    setInputValue('');
+  }, []);
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedInputValue(inputValue);
@@ -37,12 +44,19 @@ export const SearchInput = ({
   }, [debouncedInputValue, onChange]);
 
   return (
-    <input
-      className={classes.input}
-      type="text"
-      value={inputValue}
-      placeholder={placeholder}
-      onChange={handleInputChange}
-    />
+    <div className={classes.container}>
+      <input
+        className={classes.input}
+        type="text"
+        value={inputValue}
+        placeholder={placeholder}
+        onChange={handleInputChange}
+      />
+      <IconButton
+        className={classes.iconButton}
+        icon={faXmark}
+        onClick={handleClearClick}
+      />
+    </div>
   );
 };

@@ -1,0 +1,17 @@
+@import 'styles/variables.scss';
+
+.container {
+  display: inline-block;
+  text-align: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  padding: 8px;
+  .icon {
+    color: $icon-color;
+  }
+  &:hover {
+    background-color: $icon-button-hover;
+    cursor: pointer;
+  }
+}
