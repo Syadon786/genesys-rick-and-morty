@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 
 import { TableCell, TableHeaderCell, TableRow } from 'components';
 
@@ -8,8 +8,8 @@ export type CellAlignment = 'left' | 'center' | 'right';
 
 export interface ColumnConfiguration<T> {
   accessorKey: string;
-  header: ReactElement | string;
-  accessor?: (row: T) => ReactElement | string;
+  header: ReactNode;
+  accessor?: (row: T) => ReactNode;
   alignment?: CellAlignment;
 }
 
@@ -21,15 +21,17 @@ export interface ItemConfiguration {
 interface TableProps<T extends ItemConfiguration> {
   columns: ColumnConfiguration<T>[];
   items: T[];
+  footer?: ReactNode;
 }
 
 export const Table = <T extends ItemConfiguration>({
   columns,
   items,
+  footer,
 }: TableProps<T>) => (
   <table className={classes.container}>
     <thead>
-      <TableRow className={classes.headerRow}>
+      <TableRow className={classes.header}>
         {columns.map(({ accessorKey, header, alignment }) => (
           <TableHeaderCell
             key={accessorKey}
@@ -41,7 +43,7 @@ export const Table = <T extends ItemConfiguration>({
     </thead>
     <tbody>
       {items.map((row) => (
-        <TableRow className={classes.itemRow} key={row.id}>
+        <TableRow className={classes.row} key={row.id}>
           {columns.map(({ accessor, accessorKey, alignment }) => (
             <TableCell
               key={`${row.id}-${accessorKey}`}
@@ -54,5 +56,10 @@ export const Table = <T extends ItemConfiguration>({
         </TableRow>
       ))}
     </tbody>
+    {footer && (
+      <tfoot>
+        <TableRow className={classes.footer}>{footer}</TableRow>
+      </tfoot>
+    )}
   </table>
 );

@@ -1,0 +1,43 @@
+@import 'styles/_variables.scss';
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 24px 0;
+}
+
+.subCardContainer {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.mainCard {
+  flex: 1 1 0;
+}
+
+.subCard {
+  flex: 1 1 0;
+}
+
+@media (max-width: $breakpoint-md) {
+  .cardContainer {
+    justify-content: center;
+    .mainCard {
+      min-width: 80%;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .subCardContainer {
+    align-items: center;
+    min-width: 100%;
+    .subCard {
+      min-width: 80%;
+    }
+  }
+}
