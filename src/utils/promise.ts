@@ -10,17 +10,14 @@ export const assertFulfilled = <T>(
 export const errorHandler = (requestError: AxiosError) => {
   if (isAxiosError(requestError)) {
     if (requestError?.response?.data) {
-      switch (requestError.response.status) {
-        case 400:
-          return Promise.reject(requestError);
-        case 404:
-          const status = requestError.response.status;
-          const errorMessage =
-            (requestError.response as ErrorResponse).data.error ||
-            'An error occurred';
-          return toast.error(`${status}: ${errorMessage}`);
-        default:
-          return Promise.reject(requestError);
+      if (requestError.response.status === 404) {
+        const status = requestError.response.status;
+        const errorMessage =
+          (requestError.response as ErrorResponse).data.error ||
+          'An error occurred';
+        return toast.error(`${status}: ${errorMessage}`);
+      } else {
+        return Promise.reject(requestError);
       }
     }
   }
