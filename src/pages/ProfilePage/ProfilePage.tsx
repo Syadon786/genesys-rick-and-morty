@@ -8,27 +8,20 @@ import {
   CharacterCard,
   BackButton,
 } from 'components';
-import { Character, Location, Episode } from 'models';
-import { characterService, episodeService, locationService } from 'services';
+import { Location, Episode } from 'models';
+import { episodeService, locationService } from 'services';
 import { assertFulfilled } from 'utils';
+import { useCharacter } from 'queries';
 
 import classes from './profilePage.module.scss';
 
 const ProfilePage = () => {
   const { id } = useParams<{ id: string }>();
-  const [character, setCharacter] = useState<Character>();
   const [location, setLocation] = useState<Location>();
   const [origin, setOrigin] = useState<Location>();
   const [episodes, setEpisodes] = useState<Episode[]>([]);
 
-  useEffect(() => {
-    const getCharacter = async () => {
-      if (id) {
-        setCharacter(await characterService.getCharacter(parseInt(id)));
-      }
-    };
-    getCharacter();
-  }, [id]);
+  const { character } = useCharacter(id);
 
   useEffect(() => {
     const getLocationAndEpisodes = async () => {
