@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -8,42 +8,27 @@ import {
   CharacterCard,
   BackButton,
 } from 'components';
-import { Location, Episode } from 'models';
-import { episodeService, locationService } from 'services';
-import { assertFulfilled } from 'utils';
-import { useCharacter } from 'queries';
+import { useCharacter, useLocation, useEpisodes } from 'queries';
 
 import classes from './profilePage.module.scss';
 
 const ProfilePage = () => {
   const { id } = useParams<{ id: string }>();
-  const [location, setLocation] = useState<Location>();
-  const [origin, setOrigin] = useState<Location>();
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
 
   const { character } = useCharacter(id);
+  const { location } = useLocation({
+    enabled: !!character && character.location.url !== '',
+    url: character?.location.url,
+  });
+  const { location: origin } = useLocation({
+    enabled: !!character && character.origin.url !== '',
+    url: character?.origin.url,
+  });
 
-  useEffect(() => {
-    const getLocationAndEpisodes = async () => {
-      if (character) {
-        const locationUrl = character.location.url;
-        const originUrl = character.origin.url;
-        if (locationUrl !== '') {
-          setLocation(await locationService.getLocation(locationUrl));
-        }
-        if (originUrl !== '') {
-          setOrigin(await locationService.getLocation(originUrl));
-        }
-        const episodeResults = await Promise.allSettled([
-          ...character.episode.map(episodeService.getEpisode),
-        ]);
-        setEpisodes(
-          episodeResults.filter(assertFulfilled).map(({ value }) => value)
-        );
-      }
-    };
-    getLocationAndEpisodes();
-  }, [character]);
+  const { episodes } = useEpisodes({
+    enabled: !!character && !!character.episode.length,
+    urls: character?.episode ?? [],
+  });
 
   return (
     <Page title="Character Details">
