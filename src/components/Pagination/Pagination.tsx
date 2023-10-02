@@ -44,7 +44,7 @@ export const Pagination = ({
     [onPageChange]
   );
 
-  return (
+  return totalPages === 1 ? null : (
     <div className={classnames(classes.container, className)}>
       <IconButton
         disabled={page === 1}
