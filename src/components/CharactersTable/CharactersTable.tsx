@@ -1,26 +1,30 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Character } from 'models';
 import {
-  ColumnConfiguration,
   Table,
-  Avatar,
-  Page,
+  Pagination,
   StatusIndicator,
+  Avatar,
+  ColumnConfiguration,
 } from 'components';
-import { characterService } from 'services';
+import { Character } from 'models';
 
-const HomePage = () => {
-  const [items, setItems] = useState<Character[]>([]);
+import classes from './charactersTable.module.scss';
 
-  useEffect(() => {
-    const getCharacters = async () => {
-      setItems((await characterService.getCharacters()).results);
-    };
-    getCharacters();
-  }, []);
+type CharactersTableProps = {
+  items: Character[];
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
 
+export const CharactersTable = ({
+  items,
+  onPageChange,
+  page,
+  totalPages,
+}: CharactersTableProps) => {
   const avatarAccessor = useCallback(
     ({ image, name }: Character) => (
       <Avatar src={image} alt={`Avatar of ${name}`} />
@@ -65,10 +69,17 @@ const HomePage = () => {
   );
 
   return (
-    <Page title="Rick and Morty Characters">
-      <Table columns={columnConfiguration} items={items} />
-    </Page>
+    <Table
+      columns={columnConfiguration}
+      items={items}
+      footer={
+        <Pagination
+          className={classes.pagination}
+          page={page}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      }
+    />
   );
 };
-
-export default HomePage;

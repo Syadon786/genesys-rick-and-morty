@@ -41,6 +41,15 @@ export const Table = <T extends ItemConfiguration>({
         ))}
       </TableRow>
     </thead>
+
+    {footer && (
+      <tfoot>
+        <tr>
+          <td colSpan={columns.length}>{footer}</td>
+        </tr>
+      </tfoot>
+    )}
+
     <tbody>
       {items.map((row) => (
         <TableRow className={classes.row} key={row.id}>
@@ -56,10 +65,5 @@ export const Table = <T extends ItemConfiguration>({
         </TableRow>
       ))}
     </tbody>
-    {footer && (
-      <tfoot>
-        <TableRow className={classes.footer}>{footer}</TableRow>
-      </tfoot>
-    )}
   </table>
 );

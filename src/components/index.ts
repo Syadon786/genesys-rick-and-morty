@@ -7,3 +7,7 @@ export * from './Card';
 export * from './LocationCard/LocationCard';
 export * from './CharacterCard/CharacterCard';
 export * from './BackButton/BackButton';
+export * from './SearchInput/SearchInput';
+export * from './IconButton/IconButton';
+export * from './Pagination/Pagination';
+export * from './CharactersTable/CharactersTable';
