@@ -1,8 +1,9 @@
 @import 'styles/variables.scss';
 
 .container {
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -14,4 +15,8 @@
     background-color: $icon-button-hover;
     cursor: pointer;
   }
+}
+
+.disabled {
+  opacity: 0.6;
 }

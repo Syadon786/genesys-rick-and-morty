@@ -1,0 +1,23 @@
+@import 'styles/_variables.scss';
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 12px;
+  width: 16px;
+  height: 16px;
+}
+
+.pageItem {
+  &:not(.selected):hover {
+    cursor: pointer;
+    background-color: $pagination-item-hover-bg;
+  }
+}
+
+.selected {
+  background-color: $pagination-item-selected-bg;
+  color: $font-contrast;
+}
